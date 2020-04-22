@@ -1,6 +1,6 @@
 #!/bin/bash
 #echo "HELLO World"
-tshark -b duration:10 -a files:6 -w test.pcap &
+tshark -Y "ip.src==10.128.0.0/24 && ip.dst==10.128.0.0/24" -b duration:10 -a files:6 -w test.pcap &
 cnt=1
 #filename="text.pcap"
 #grepname="test_000$cnt"
