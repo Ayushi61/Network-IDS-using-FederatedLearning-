@@ -3,10 +3,10 @@
 #empty_field	(empty)
 #unset_field	-
 #path	weird
-#open	2020-04-13-04-44-12
+#open	2020-04-22-21-51-52
 #fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	name	addl	notice	peer
 #types	time	string	addr	port	addr	port	string	string	bool	string
-1586747055.366817	CANYXv3OR8q0bHP9Pa	98.26.12.235	59420	10.128.0.9	22	bad_TCP_checksum	-	F	bro
-1586747060.229829	C5Luq21JEDfHpMwx81	10.128.0.9	44712	169.254.169.254	80	bad_TCP_checksum	-	F	bro
-1586747060.235213	CX0Dbo1lfviVRTmHQb	10.128.0.9	44718	169.254.169.254	80	active_connection_reuse	-	F	bro
-#close	2020-04-13-04-44-12
+1587591930.399223	CtnmGv1nlQqWyphTQ1	10.128.0.12	56484	104.17.142.36	443	bad_TCP_checksum	-	F	bro
+1587591930.411564	CtnmGv1nlQqWyphTQ1	10.128.0.12	56484	104.17.142.36	443	active_connection_reuse	-	F	bro
+1587591930.480230	CM18VjRSv8DTUve1a	10.128.0.12	56484	104.17.142.36	443	above_hole_data_without_any_acks	-	F	bro
+#close	2020-04-22-21-51-52
