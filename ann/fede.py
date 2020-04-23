@@ -10,6 +10,26 @@ import numpy as np
 import torch.nn.functional as F
 from syft.frameworks.torch.fl import utils
 from syft.workers.websocket_client import WebsocketClientWorker
+import getopt
+import os
+import sys
+argv=sys.argv[1:]
+try:
+    opts, args = getopt.getopt(argv, "hw:p:i:", ["workers=", "ports=","ids="])
+except getopt.GetoptError:
+    print( 'fede.py -w <worker1,worker2> -p <port1,port2> -i <id1,id2>')
+    sys.exit(2)
+for opt, arg in opts:
+    if opt == '-h':
+        print( 'fede.py -w <worker1,worker2> -p <port1,port2> -i <id1,id2>')
+        sys.exit()
+    elif opt in ("-w", "--workers"):
+        workers = arg.split(",")
+    elif opt in ("-p", "--ports"):
+        ports = arg.split(",")
+    elif opt in ("-i", "--ids"):
+        ids = arg.split(",")
+
 #matplotlib.use('GTK')
 # We use the KDD CUP 1999 data (https://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html)
 # 41 column names can be found at https://kdd.ics.uci.edu/databases/kddcup99/kddcup.names
@@ -27,7 +47,7 @@ colnames = ['duration', 'protocol_type', 'service', 'flag', 'src_bytes', 'dst_by
 # http://kdd.ics.uci.edu/databases/kddcup99/kddcup.data_10_percent.gz
 # We select the first 100K records from this data
 df = pd.read_csv("http://kdd.ics.uci.edu/databases/kddcup99/kddcup.data_10_percent.gz",
-        names=colnames+["threat_type"])#[:100000]
+        names=colnames+["threat_type"])[:100000]
 
 print(df.head(3))
 threat_count_dict = Counter(df["threat_type"])
@@ -73,13 +93,13 @@ device = torch.device("cpu")
 # Data will be distributed among these VirtualWorkers.
 # Remote training of the model will happen here.
 
-kwargs_websocket_bob = {"host": "10.128.0.16", "hook": hook}
+kwargs_websocket_bob = {"host": workers[1], "hook": hook}
 #gatway2 = sy.VirtualWorker(hook, id="gatway2")
-gatway2 = WebsocketClientWorker(id="bob", port=8778, **kwargs_websocket_bob)
+gatway2 = WebsocketClientWorker(id=ids[1], port=ports[1], **kwargs_websocket_bob)
 
-kwargs_websocket_alice = {"host": "10.128.0.12", "hook": hook}
+kwargs_websocket_alice = {"host": workers[0], "hook": hook}
 #gatway1 = sy.VirtualWorker(hook, id="gatway1")
-gatway1= WebsocketClientWorker(id="alice", port=8777, **kwargs_websocket_alice)
+gatway1= WebsocketClientWorker(id=ids[0], port=ports[0], **kwargs_websocket_alice)
 # Number of times we want to iterate over whole training data
 BATCH_SIZE = 1000
 EPOCHS = 2
@@ -213,12 +233,15 @@ for epoch in range(1, EPOCHS + 1):
     test(model, device, federated_test_loader)
 
 # Save the model
-torch.save(model.state_dict(), "binaize-threat-model.pt")
+torch.save(model.state_dict(), "binaize-threat-model_10.pt")
 # Reload the model in a new model object
 model_new = Net(n_feature,n_class)
-model_new.load_state_dict(torch.load("binaize-threat-model.pt"))
+model_new.load_state_dict(torch.load("binaize-threat-model_10.pt"))
 model_new.eval()
-
+process = os.popen("sudo scp -i /home/ayush/.ssh/id_rsa -o stricthostkeychecking=no /home/ayush/ADS/ann/binaize-threat-model_fully_trained.pt ayush@%s:/home/ayush/ADS/predict_workers" %(workers[0]))
+output=process.read()
+process = os.popen("sudo scp -i /home/ayush/.ssh/id_rsa -o stricthostkeychecking=no /home/ayush/ADS/ann/binaize-threat-model_fully_trained.pt ayush@%s:/home/ayush/ADS/predict_workers" %(workers[1]))
+output=process.read()
 # Take the 122th record from the test data
 idx = 122
 data = test_inputs[idx]
