@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 import torch
 import syft as sy
 import numpy as np
+import torch.nn.functional as F
 from syft.frameworks.torch.fl import utils
 from syft.workers.websocket_client import WebsocketClientWorker
 #matplotlib.use('GTK')
@@ -26,7 +27,7 @@ colnames = ['duration', 'protocol_type', 'service', 'flag', 'src_bytes', 'dst_by
 # http://kdd.ics.uci.edu/databases/kddcup99/kddcup.data_10_percent.gz
 # We select the first 100K records from this data
 df = pd.read_csv("http://kdd.ics.uci.edu/databases/kddcup99/kddcup.data_10_percent.gz",
-                 names=colnames+["threat_type"])
+        names=colnames+["threat_type"])#[:100000]
 
 print(df.head(3))
 threat_count_dict = Counter(df["threat_type"])
@@ -121,8 +122,24 @@ class Net(nn.Module):
         """
         super(Net, self).__init__()
         self.linear = torch.nn.Linear(input_dim, output_dim)
+        #self.fc1 = torch.nn.Linear(input_dim, 1024)
+        #self.dropout1 = torch.nn.Dropout(0.01)
+        #self.fc2 = torch.nn.Linear(1024, 768)
+        #self.dropout2 = torch.nn.Dropout(0.01)
+        #self.fc4 = torch.nn.Linear(768, 512)
+        #self.dropout3 = torch.nn.Dropout(0.01)
+        #self.fc3 = torch.nn.Linear(512, output_dim)
+
     def forward(self, x):
         outputs = self.linear(x)
+        #x = x.view(-1, 33)
+        #x = F.relu(self.fc1(x))
+        #x = self.dropout1(x)
+        #x = F.relu(self.fc2(x))
+        #x = self.dropout2(x)
+        #x = F.relu(self.fc4(x))
+        #x = self.dropout3(x)
+        #x = F.sigmoid(self.fc3(x))
         return outputs
 
 import torch.nn.functional as F
