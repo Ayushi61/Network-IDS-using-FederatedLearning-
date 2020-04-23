@@ -3,8 +3,9 @@
 #empty_field	(empty)
 #unset_field	-
 #path	reporter
-#open	2020-04-22-21-51-52
+#open	2020-04-23-04-28-06
 #fields	ts	level	message	location
 #types	time	enum	string	string
-1587591934.593729	Reporter::WARNING	Your trace file likely has invalid TCP checksums, most likely from NIC checksum offloading.  By default, packets with invalid checksums are discarded by Bro unless using the -C command-line option or toggling the 'ignore_checksums' variable.  Alternatively, disable checksum offloading by the network adapter to ensure Bro analyzes the actual checksums that are transmitted.	/usr/share/bro/base/misc/find-checksum-offloading.bro, line 54
-#close	2020-04-22-21-51-52
+1587616078.027578	Reporter::WARNING	Your trace file likely has invalid TCP checksums, most likely from NIC checksum offloading.  By default, packets with invalid checksums are discarded by Bro unless using the -C command-line option or toggling the 'ignore_checksums' variable.  Alternatively, disable checksum offloading by the network adapter to ensure Bro analyzes the actual checksums that are transmitted.	/usr/share/bro/base/misc/find-checksum-offloading.bro, line 54
+1587616078.027578	Reporter::WARNING	The analyzed trace file was determined to contain only TCP control packets, which may indicate it's been pre-filtered.  By default, Bro reports the missing segments for this type of trace, but the 'detect_filtered_trace' option may be toggled if that's not desired.	/usr/share/bro/base/misc/find-filtered-trace.bro, line 48
+#close	2020-04-23-04-28-06

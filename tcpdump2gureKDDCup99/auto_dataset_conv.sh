@@ -20,7 +20,12 @@ do
 			f2=$(ls | grep "test_0000${cnt1}_*")
 			if [ "$f2" == "" ]
 			then
-				f2=$(ls | grep "test_0000${cnt1}_*")
+				if [ $cnt1 -eq 10 ]
+				then
+					f2=$(ls | grep "test_000${cnt1}_*")
+				else
+					f2=$(ls | grep "test_0000${cnt1}_*")
+				fi
 			fi
 
 		fi
@@ -30,11 +35,16 @@ do
 		if [ "$filename" != "" ]
                 then
         		cnt1=$((cnt + 1))
-                        f2=$(ls | grep "test_0000${cnt1}_*")
+                        f2=$(ls | grep "test_000${cnt1}_*")
                         if [ "$f2" == "" ]
                         then
-                                f2=$(ls | grep "test_0000${cnt1}_*")
-                        fi
+                        	if [ $cnt1 -eq 100 ]
+                                then
+                                        f2=$(ls | grep "test_00${cnt1}_*")
+                                else
+                                        f2=$(ls | grep "test_000${cnt1}_*")
+                                fi
+			fi
 		fi
 	elif [ $cnt -lt 1000 ]
 	then
@@ -42,10 +52,10 @@ do
 		if [ "$filename" != "" ]
 		then
                         cnt1=$((cnt + 1))
-                        f2=$(ls | grep "test_0000${cnt1}_*")
+                        f2=$(ls | grep "test_00${cnt1}_*")
                         if [ "$f2" == "" ]
                         then
-                                f2=$(ls | grep "test_0000${cnt1}_*")
+                                f2=$(ls | grep "test_00${cnt1}_*")
                         fi
 		fi
 
@@ -55,10 +65,10 @@ do
 		if [ "$filename" != "" ]
 		then
                        cnt1=$((cnt + 1))
-                        f2=$(ls | grep "test_0000${cnt1}_*")
+                        f2=$(ls | grep "test_0${cnt1}_*")
                         if [ "$f2" == "" ]
                         then
-                                f2=$(ls | grep "test_0000${cnt1}_*")
+                                f2=$(ls | grep "test_0${cnt1}_*")
                         fi
  
 		fi
@@ -69,10 +79,10 @@ do
 		if [ "$filename" != "" ]
                 then
                         cnt1=$((cnt + 1))
-                        f2=$(ls | grep "test_0000${cnt1}_*")
+                        f2=$(ls | grep "test_${cnt1}_*")
                         if [ "$f2" == "" ]
                         then
-                                f2=$(ls | grep "test_0000${cnt1}_*")
+                                f2=$(ls | grep "test_${cnt1}_*")
                         fi
                 fi
 
