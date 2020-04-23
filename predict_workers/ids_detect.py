@@ -10,7 +10,9 @@ import numpy as np
 import torch.nn.functional as F
 from syft.frameworks.torch.fl import utils
 import torch.nn as nn
-from letters import print_letters 
+import os
+import operator
+#from letters import print_letters 
 class Net(nn.Module):
     def __init__(self, input_dim, output_dim):
         """
@@ -74,48 +76,71 @@ y = encoder.fit_transform(threat_types)
 PATH = "/home/ayush/ADS/tcpdump2gureKDDCup99/"
 files = 99
 
+flag1=0
+flag2=0
 
 try:
-	print("Predicting Live Captured Data")
-	while True:
-		if os.path.isfile("binaize-threat-model.pt"):
-	
-			model_new.load_state_dict(torch.load("binaize-threat-model.pt"))
-			model_new.eval()
-			
-			for i in range(files):
-				if os.path.isfile(PATH + "seed_" + str(i+2) + ".csv""):
-					df = pd.read_csv((PATH + "seed_" str(i+1) + ".csv", names=colnames)
-					numerical_df = df[n_col.columns].copy()
-					final_df = numerical_df/numerical_df1.max()
-					X_test = final_df.values
-					test_inputs = torch.tensor(X_test,dtype=torch.float)			
-
-					size=len(test_inputs)
-					predict_labels = {}
-
-					for j in range(size):
-						data = test_inputs[j]
-						pred = model_new(data)
-						pred_label = int(pred.argmax().data.cpu().numpy())
-						pred_threat = encoder.inverse_transform([pred_label])[0]
-						
-						if pred_threat == 'normal':
-							predict_labels[pred_threat] += 1
-						else:
-							predict_labels[pred_threat] += 1
-
-			if predict_labels['normal'] >= 3:
-				print ("--- NORMAL STATE ---")
-			else:
-				print ("\n!!! ALERT !!!")
-				print ("!!! PC UNDER ATTACK !!!")
-				print("\nPredicted threat type : ", max(predict_labels.items(), key=operator.itemgetter(1))[0])
-
+    print("Predicting Live Captured Data")
+    while True:
+        if os.path.isfile("binaize-threat-model_fully_trained.pt"):
+            model_new.load_state_dict(torch.load("binaize-threat-model_fully_trained.pt"))
+            model_new.eval()
+            for i in range(files):
+                if (os.path.isfile(PATH + "seed_" + str(i+2) + ".csv")):
+                    df = pd.read_csv((PATH + "seed_"+ str(i+1) + ".csv"), names=colnames)
+                    numerical_df = df[n_col.columns].copy()
+                    final_df = numerical_df/numerical_df1.max()
+                    X_test = final_df.values
+                    #print(i)
+                    #print(X_test)
+                    if(len(X_test)!=0):
+                        test_inputs = torch.tensor(X_test,dtype=torch.float)
+                        size=len(test_inputs)
+                        predict_labels={
+                            "normal.": 0,
+                            "buffer_overflow.": 0,
+                            "loadmodule.": 0,
+                            "perl.": 0,
+                            "neptune.": 0,
+                            "smurf.": 0,
+                            "guess_passwd.": 0,
+                            "pod.": 0,
+                            "teardrop.": 0,
+                            "portsweep.": 0,
+                            "ipsweep.": 0,
+                            "land.": 0,
+                            "ftp_write.": 0,
+                            "back.": 0,
+                            "imap.": 0,
+                            "satan.": 0,
+                            "phf.": 0,
+                            "nmap.": 0,
+                            "multihop.": 0,
+                            "warezmaster.": 0
+                        }
+                        for j in range(size):
+                            data = test_inputs[j]
+                            pred = model_new(data)
+                            pred_label = int(pred.argmax().data.cpu().numpy())
+                            pred_threat = encoder.inverse_transform([pred_label])[0]
+                            if pred_threat == "normal.":
+                                predict_labels[pred_threat] += 1
+                                flag1 +=1
+                            else:
+                                predict_labels[pred_threat] += 1
+                                flag2 +=1
+            if predict_labels["normal."] >= 3:
+                os.system("clear")
+                print ("--- NORMAL STATE --- ", flag1)
+            else:
+                os.system("clear")
+                print ("\n!!! ALERT !!!")
+                print ("!!! PC UNDER ATTACK !!! ", flag1, flag2)
+                print("\nPredicted threat type : ", max(predict_labels.items(), key=operator.itemgetter(1))[0])
 except KeyboardInterrupt:
-	print("Quitting the program.")
+    print("Quitting the program.")
 except:
-	print("Unexpected error: "+sys.exc_info()[0])
-	raise
+    print("Unexpected error: ")
+    raise
 
 

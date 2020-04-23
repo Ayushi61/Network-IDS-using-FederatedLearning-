@@ -10,6 +10,8 @@ import numpy as np
 import torch.nn.functional as F
 from syft.frameworks.torch.fl import utils
 import torch.nn as nn
+import sys
+
 class Net(nn.Module):
     def __init__(self, input_dim, output_dim):
         """
@@ -54,7 +56,7 @@ colnames = ['duration', 'protocol_type', 'service', 'flag', 'src_bytes', 'dst_by
             'dst_host_diff_srv_rate', 'dst_host_same_src_port_rate', 'dst_host_srv_diff_host_rate',
             'dst_host_serror_rate', 'dst_host_srv_serror_rate', 'dst_host_rerror_rate',
             'dst_host_srv_rerror_rate']
-df = pd.read_csv("/home/ayush/ADS/tcpdump2gureKDDCup99/seed_1.csv",
+df = pd.read_csv("/home/ayush/ADS/tcpdump2gureKDDCup99/seed_8.csv",
         names=colnames)
 df_dta= pd.read_csv("http://kdd.ics.uci.edu/databases/kddcup99/kddcup.data_10_percent.gz",
         names=colnames+["threat_type"])[:100000]
@@ -76,6 +78,7 @@ numerical_df = df[n_col.columns].copy()
 print("fsgf-------------------------"+str(numerical_df.max()))
 final_df = numerical_df/numerical_df1.max()
 X_test = final_df.values
+print(X_test)
 test_inputs = torch.tensor(X_test,dtype=torch.float)
 #.tag("#iot", "#network","#data","#test")
 #test_labels = torch.tensor(y_test).tag("#iot", "#network","#target","#test")
