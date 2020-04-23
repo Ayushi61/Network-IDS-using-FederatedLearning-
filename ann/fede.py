@@ -26,7 +26,7 @@ colnames = ['duration', 'protocol_type', 'service', 'flag', 'src_bytes', 'dst_by
 # We take 10% of the original data which can be found at 
 # http://kdd.ics.uci.edu/databases/kddcup99/kddcup.data_10_percent.gz
 # We select the first 100K records from this data
-df = pd.read_csv("http://kdd.ics.uci.edu/databases/kddcup99/kddcup.data_10_percent.gz",
+df = pd.read_csv("http://kdd.ics.uci.edu/databases/kddcup99/kddcup.data.gz",
         names=colnames+["threat_type"])#[:100000]
 
 print(df.head(3))
