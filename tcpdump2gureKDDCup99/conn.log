@@ -3,11 +3,13 @@
 #empty_field	(empty)
 #unset_field	-
 #path	conn
-#open	2020-04-13-04-44-12
+#open	2020-04-22-21-51-52
 #fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	service	duration	orig_bytes	resp_bytes	conn_state	local_orig	local_resp	missed_bytes	history	orig_pkts	orig_ip_bytes	resp_pkts	resp_ip_bytes	tunnel_parents
 #types	time	string	addr	port	addr	port	enum	string	interval	count	count	string	bool	bool	count	string	count	count	count	count	set[string]
-1586747060.234898	CX0Dbo1lfviVRTmHQb	10.128.0.9	44718	169.254.169.254	80	tcp	-	-	-	-	OTH	-	-	0	C	0	0	0	0	(empty)
-1586747055.366817	CANYXv3OR8q0bHP9Pa	98.26.12.235	59420	10.128.0.9	22	tcp	-	8.808019	0	0	OTH	-	-	0	cA	18	720	0	0	(empty)
-1586747060.229789	C5Luq21JEDfHpMwx81	10.128.0.9	44712	169.254.169.254	80	tcp	-	0.000912	0	582	SHR	-	-	0	dCfa	0	0	3	702	(empty)
-1586747060.235213	C09zoK3zf1paP07vwl	10.128.0.9	44718	169.254.169.254	80	tcp	-	0.000185	0	0	OTH	-	-	0	hCa	0	0	3	128	(empty)
-#close	2020-04-13-04-44-12
+1587591930.399223	CtnmGv1nlQqWyphTQ1	10.128.0.12	56484	104.17.142.36	443	tcp	-	-	-	-	OTH	-	-	0	C	0	0	0	0	(empty)
+1587591930.411564	CM18VjRSv8DTUve1a	10.128.0.12	56484	104.17.142.36	443	tcp	-	0.133053	0	1132439	SHR	-	-	0	^hCacdf	0	0	15	14580	(empty)
+1587591927.325855	CJ4Uxc3In16bhvoOTc	10.128.0.12	8	10.128.0.8	0	icmp	-	1.001792	112	112	OTH	-	-	0	-	2	168	2	168	(empty)
+1587591928.329822	CXBL8vYAHPbNwoGIe	10.128.0.12	8	10.128.0.16	0	icmp	-	1.001659	112	112	OTH	-	-	0	-	2	168	2	168	(empty)
+1587591934.593671	CFdSbZThayhfN4tA3	10.128.0.12	11	10.128.0.8	1	icmp	-	0.000058	3288	0	OTH	-	-	0	-	6	3456	0	0	(empty)
+1587591929.333328	Ck1l1q1RBO9Yhe5Rk2	10.128.0.12	8	10.128.0.11	0	icmp	-	1.001650	112	112	OTH	-	-	0	-	2	168	2	168	(empty)
+#close	2020-04-22-21-51-52
