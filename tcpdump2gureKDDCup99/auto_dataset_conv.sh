@@ -1,12 +1,15 @@
 #!/bin/bash
 #echo "HELLO World"
-tshark  -b duration:10 -a files:6 -w test.pcap &
+rm -rf *pcap
+rm -rf *list
+rm -rf *csv
+tshark  -b duration:10 -b files:99 -w test.pcap &
 cnt=1
 #filename="text.pcap"
 #grepname="test_000$cnt"
 #filename=$(ls | grep "test_000${cnt}_*")
 #echo $filename
-while [ $cnt -lt 6 ]
+while [ $cnt -lt 100 ]
 do
 	if [ $cnt -lt 10 ]
 	then
@@ -87,6 +90,11 @@ do
 			./trafAld.out conn${cnt}_sort.list trafAid_${cnt}.list
 			cat trafAid_${cnt}.list | awk '{ for(i=7;i<47;i++) {printf $i;printf ",";} printf $47;print "" }' > seed_${cnt}.csv
 			cnt=$((cnt + 1))
+			if [ $cnt -eq 100 ]
+			then
+				touch seed_${cnt}.csv
+				cnt=1
+			fi
 		fi
 	fi
 	#echo $cnt
