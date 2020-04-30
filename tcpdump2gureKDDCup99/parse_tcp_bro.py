@@ -39,7 +39,7 @@ def parse(inputfile,outputfile):
         srv_serror=0
         srv_error=0
         srv_diff_host=0
-        same_src_port=0
+
         for j in range(startpt1,i):
             #print(line1)
             arr2=copy.deepcopy(line1[j].split(" "))
@@ -55,7 +55,7 @@ def parse(inputfile,outputfile):
             flag2 = arr2[9]
             startT21 = int(startTimet2.split(".")[0])
             startT22 = int(startTimet2.split(".")[1])
-            if (((startT1-2)<=startT22) and (startT22)<=startT1):
+            if (((startT1-2)<=startT21) and (startT22)<=startT21):
                 if(start==0):
                     startpt1=j
                     start=1;
