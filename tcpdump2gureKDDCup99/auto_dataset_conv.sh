@@ -103,7 +103,7 @@ do
 			if [ $cnt -eq 10 ]
 			then
 				touch seed_${cnt}.csv
-				cnt=1
+				#cnt=1
 			fi
 		fi
 	fi
