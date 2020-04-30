@@ -97,7 +97,8 @@ do
 			tshark -r $filename -Y "(ip.src==10.128.0.0/24 && ip.dst==10.128.0.0/24) || (ip.src==104.17.142.0/24 || ip.dst==104.17.142.0/24) " -w test_${cnt}.pcap
 			bro -r test_${cnt}.pcap darpa2gurekddcup.bro > conn${cnt}.list
 			sort -n conn${cnt}.list > conn${cnt}_sort.list
-			./trafAld.out conn${cnt}_sort.list trafAid_${cnt}.list
+			#./trafAld.out conn${cnt}_sort.list trafAid_${cnt}.list
+			python3 parse_tcp_bro.py -i conn${cnt}_sort.list out_${cnt}.list 
 			cat trafAid_${cnt}.list | awk '{ for(i=7;i<47;i++) {printf $i;printf ",";} printf $47;print "" }' > seed_${cnt}.csv
 			cnt=$((cnt + 1))
 			if [ $cnt -eq 10 ]
