@@ -53,9 +53,9 @@ def parse(inputfile,outputfile):
             protocol2 = arr2[7]
             service2 = arr2[8]
             flag2 = arr2[9]
-            startT21 = int(startTimet1.split(".")[0])
-            startT22 = int(startTimet1.split(".")[1])
-            if (((startT1-2)<=startT2) and (startT2)<=startT1):
+            startT21 = int(startTimet2.split(".")[0])
+            startT22 = int(startTimet2.split(".")[1])
+            if (((startT1-2)<=startT22) and (startT22)<=startT1):
                 if(start==0):
                     startpt1=j
                     start=1;
@@ -135,8 +135,8 @@ def parse(inputfile,outputfile):
             protocol2 = arr2[7]
             service2 = arr2[8]
             flag2 = arr2[9]
-            startT21 = int(startTimet1.split(".")[0])
-            startT22 = int(startTimet1.split(".")[1])
+            startT21 = int(startTimet2.split(".")[0])
+            startT22 = int(startTimet2.split(".")[1])
             if(resp_ht1==resp_ht2):
                 count+=1
                 if (flag2 == "S0" or flag2 == "S1" or flag2 == "S2" or flag2 == "S3"):
