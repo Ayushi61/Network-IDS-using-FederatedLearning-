@@ -3,10 +3,8 @@
 #empty_field	(empty)
 #unset_field	-
 #path	conn
-#open	2020-04-23-14-15-17
+#open	2020-04-30-04-09-43
 #fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	service	duration	orig_bytes	resp_bytes	conn_state	local_orig	local_resp	missed_bytes	history	orig_pkts	orig_ip_bytes	resp_pkts	resp_ip_bytes	tunnel_parents
 #types	time	string	addr	port	addr	port	enum	string	interval	count	count	string	bool	bool	count	string	count	count	count	count	set[string]
-1587651308.578795	CgAOvF3kc5Uann9SVl	10.128.0.12	8	10.128.0.8	0	icmp	-	1.001460	112	112	OTH	-	-	0	-	2	168	2	168	(empty)
-1587651310.585781	CTdhVl4ccOvaXVxGpb	10.128.0.12	8	10.128.0.11	0	icmp	-	1.001561	112	112	OTH	-	-	0	-	2	168	2	168	(empty)
-1587651309.582182	CEcnA3KP0uTGW3tRh	10.128.0.12	8	10.128.0.16	0	icmp	-	1.001471	112	112	OTH	-	-	0	-	2	168	2	168	(empty)
-#close	2020-04-23-14-15-17
+1588219694.431951	C2DeKf22VX5V0A4Oqd	10.128.0.3	8	10.128.0.2	0	icmp	-	1.001744	112	112	OTH	-	-	0	-	2	168	2	168	(empty)
+#close	2020-04-30-04-09-43

@@ -3,13 +3,13 @@
 rm -rf *pcap
 rm -rf *list
 rm -rf *csv
-tshark  -b duration:10 -b files:99 -w test.pcap &
+tshark  -b duration:10 -a files:10 -w test.pcap &
 cnt=1
 #filename="text.pcap"
 #grepname="test_000$cnt"
 #filename=$(ls | grep "test_000${cnt}_*")
 #echo $filename
-while [ $cnt -lt 100 ]
+while [ $cnt -lt 10 ]
 do
 	if [ $cnt -lt 10 ]
 	then
@@ -100,7 +100,7 @@ do
 			./trafAld.out conn${cnt}_sort.list trafAid_${cnt}.list
 			cat trafAid_${cnt}.list | awk '{ for(i=7;i<47;i++) {printf $i;printf ",";} printf $47;print "" }' > seed_${cnt}.csv
 			cnt=$((cnt + 1))
-			if [ $cnt -eq 100 ]
+			if [ $cnt -eq 10 ]
 			then
 				touch seed_${cnt}.csv
 				cnt=1
