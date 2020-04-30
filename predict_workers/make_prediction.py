@@ -45,8 +45,6 @@ model_new = Net(33,23)
 model_new.load_state_dict(torch.load("binaize-threat-model_fully_trained.pt"))
 model_new.eval()
 
-# Take the 122th record from the test data
-idx = 122
 colnames = ['duration', 'protocol_type', 'service', 'flag', 'src_bytes', 'dst_bytes', 'land',
             'wrong_fragment', 'urgent', 'hot', 'num_failed_logins', 'logged_in', 'num_compromised',
             'root_shell', 'su_attempted', 'num_root', 'num_file_creations', 'num_shells', 'num_access_files',
@@ -56,8 +54,6 @@ colnames = ['duration', 'protocol_type', 'service', 'flag', 'src_bytes', 'dst_by
             'dst_host_diff_srv_rate', 'dst_host_same_src_port_rate', 'dst_host_srv_diff_host_rate',
             'dst_host_serror_rate', 'dst_host_srv_serror_rate', 'dst_host_rerror_rate',
             'dst_host_srv_rerror_rate']
-#df = pd.read_csv("/home/ayush/ADS/tcpdump2gureKDDCup99/seed_8.csv",
-        #names=colnames)
 df_dta= pd.read_csv("http://kdd.ics.uci.edu/databases/kddcup99/kddcup.data_10_percent.gz",
         names=colnames+["threat_type"])[:100000]
 numerical_colmanes = ['duration', 'src_bytes', 'dst_bytes', 'wrong_fragment', 'urgent', 'hot',
