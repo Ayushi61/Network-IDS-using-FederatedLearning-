@@ -42,7 +42,7 @@ class Net(nn.Module):
 
 
 model_new = Net(33,23)
-model_new.load_state_dict(torch.load("binaize-threat-model_fully_trained.pt"))
+model_new.load_state_dict(torch.load("binaize-threat-model.pt"))
 model_new.eval()
 
 # Take the 122th record from the test data
