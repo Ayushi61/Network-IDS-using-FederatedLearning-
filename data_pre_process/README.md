@@ -1,25 +1,15 @@
-# tcpdump2gureKDDCup99
-Creates a KDDCup99 format databse using bro-ids from traffic sniffed with tcpdump.
+# Data pre processing
+./auto_dataset_conv.sh
+Step1. run ./auto_dataset_conv.sh
+This starts capturing packerts, in the interval of 10 seconds, total of 100 seconds. Interval and iterations can be increased by altering the line- "tshark  -b duration:10 -a files:10 -w test.pcap &" in the script
 
-# Usage
-Firstly sniff traffic data with tcpdump:
+It generated the pcap every 10 seconds, bro script parses the pcap, and genrates the parsed file. 
 
-tcpdump -w 20150122_1630.pcap -i eth1
+Uses bro-ids script to generate the parsed traffic from tshark output- from pcap files/ 
+ref- https://github.com/inigoperona/tcpdump2gureKDDCup99/blob/master/darpa2gurekddcup.bro
 
-Secondly compute the attributes which defines the connections, intrinsic attributes and content attributes with bro-ids and running the darpa2gurekddcup.bro policy/script:
+The  parsed file is fed to parse_tcp_bro.py, in order to calculate few other parameters like :
+'duration'	'src_bytes'	'dst_bytes'	'wrong_fragment'	'urgent'	'hot'	'num_failed_logins'	'num_compromised'	'root_shell'	'su_attempted'	'num_root'	'num_file_creations'	'num_shells'	'num_access_files'	'num_outbound_cmds' 'count'	'srv_count'	'serror_rate'	'srv_serror_rate'	'rerror_rate'	'srv_rerror_rate'	'same_srv_rate'	'diff_srv_rate'	'srv_diff_host_rate'	'dst_host_count'	'dst_host_srv_count'	'dst_host_same_srv_rate'	'dst_host_diff_srv_rate'	'dst_host_same_src_port_rate'	'dst_host_srv_diff_host_rate'	'dst_host_serror_rate'	'dst_host_srv_serror_rate'	'dst_host_rerror_rate'	'dst_host_srv_rerror_rate'		
 
-bro -r 20150122_1630.pcap darpa2gurekddcup.bro > conn.list
 
-For each connection the attributes of conn.list: num\_conn, startTimet, orig\_pt, resp\_pt, orig\_ht, resp\_ht, duration, protocol, resp\_pt, flag, src\_bytes, dst\_bytes, land, wrong\_fragment, urg, hot, num\_failed\_logins, logged\_in, num\_compromised, root\_shell, su\_attempted, num\_root, num\_file\_creations, num\_shells, num\_access\_files, num\_outbound\_cmds, is\_hot\_login, is\_guest\_login.
-
-Afterwards, sort the conn.list by the connection identifier number (num\_conn) which orders the connections by starting time:
-
-sort -n conn.list > conn_sort.list
-
-Finally, compile and run the trafAld.c C program to create traffic attributes:
-
-gcc trafAld.c -o trafAld.out # compile. it arises some warnings
-
-./trafAld.out conn_sort.list # it creates trafAld.list which includes the gureKDDCup99 attributes
-
-For each connection the attributes of trafAld.list: num\_conn, startTimet, orig\_pt, resp\_pt, orig\_ht, resp\_ht, duration, protocol, resp\_pt, flag, src\_bytes, dst\_bytes, land, wrong\_fragment, urg, hot, num\_failed\_logins, logged\_in, num\_compromised, root\_shell, su\_attempted, num\_root, num\_file\_creations, num\_shells, num\_access\_files, num\_outbound\_cmds, is\_hot\_login, is\_guest\_login, count\_sec, srv\_count\_sec, serror\_rate\_sec, srv\_serror\_rate\_sec, rerror\_rate\_sec, srv\_error\_rate\_sec, same\_srv\_rate\_sec, diff\_srv\_rate\_sec, srv\_diff\_host\_rate\_sec, count\_100, srv\_count\_100, same\_srv\_rate\_100, diff\_srv\_rate\_100, same\_src\_port\_rate\_100, srv\_diff\_host\_rate\_100, serror\_rate\_100, srv\_serror\_rate\_100, rerror\_rate\_100, srv\_rerror\_rate\_100.
+This python script generates a seed csv file, which acts as an input to ../predict_workers/make_prediction.py to detect intrusions live. 
