@@ -1,3 +1,7 @@
+'''
+Author: Benzil
+reference:https://arxiv.org/pdf/1804.07474.pdf
+'''
 import torch.nn.functional as F
 import torch
 def test(model, device, federated_test_loader):
