@@ -1,3 +1,9 @@
+'''
+Author: Benzil
+Reference: https://ieeexplore-ieee-org.prox.lib.ncsu.edu/stamp/stamp.jsp?tp=&arnumber=6149943
+https://arxiv.org/pdf/1804.07474.pdf
+
+'''
 import torch.nn as nn
 import torch
 import torch.nn.functional as F
