@@ -1,3 +1,7 @@
+'''
+Author : Benzil
+reference :https://arxiv.org/pdf/1804.07474.pdf
+'''
 import torch.nn.functional as F
 
 def train(model, device, federated_train_loader, optimizer, epoch,BATCH_SIZE,LOG_INTERVAL):
