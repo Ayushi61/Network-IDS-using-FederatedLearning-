@@ -66,8 +66,8 @@ def run_train_test(workers,ports,ids,X_train, X_test, y_train, y_test,encoder):
     #gatway4_test_dataset = sy.BaseDataset(test_inputs[3*test_idx:], test_labels[3*test_idx:]).send(gatway3)
     
     # Create federated datasets, an extension of Pytorch TensorDataset class
-    federated_train_dataset = sy.FederatedDataset([gatway1_train_dataset, gatway2_train_dataset)]#,gatway3_train_dataset,gatway4_train_dataset])
-    federated_test_dataset = sy.FederatedDataset([gatway1_test_dataset, gatway2_test_dataset)]#,gatway3_test_dataset,gatway4_test_dataset])
+    federated_train_dataset = sy.FederatedDataset([gatway1_train_dataset, gatway2_train_dataset])#,gatway3_train_dataset,gatway4_train_dataset])
+    federated_test_dataset = sy.FederatedDataset([gatway1_test_dataset, gatway2_test_dataset])#,gatway3_test_dataset,gatway4_test_dataset])
     
     # Create federated dataloaders, an extension of Pytorch DataLoader class
     federated_train_loader = sy.FederatedDataLoader(federated_train_dataset, shuffle=True, batch_size=BATCH_SIZE)
