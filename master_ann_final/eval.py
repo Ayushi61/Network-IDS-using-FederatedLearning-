@@ -1,3 +1,7 @@
+'''
+Author -Benzil 
+reference: https://arxiv.org/pdf/1804.07474.pdf
+'''
 import torch.optim as optim
 from model import *
 from train import *
