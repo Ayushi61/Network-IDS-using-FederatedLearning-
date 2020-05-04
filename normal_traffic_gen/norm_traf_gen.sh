@@ -1,4 +1,5 @@
 #!/bin/bash
+#Author :Ayushi
 ip1=$1
 ip2=$2
 #ip3=$3
