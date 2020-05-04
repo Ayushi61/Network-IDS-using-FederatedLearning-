@@ -1,3 +1,7 @@
+'''
+Author -Ayushi
+reference- https://github.com/OpenMined/PySyft
+'''
 from multiprocessing import Process
 import argparse
 import os
