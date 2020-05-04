@@ -27,13 +27,13 @@ def run_train_test(workers,ports,ids,X_train, X_test, y_train, y_test,encoder):
     kwargs_websocket_alice = {"host": workers[0], "hook": hook}
     #gatway1 = sy.VirtualWorker(hook, id="gatway1")
     gatway1= WebsocketClientWorker(id=ids[0], port=ports[0], **kwargs_websocket_alice)
-    kwargs_websocket_bob2 = {"host": workers[2], "hook": hook}
+    #kwargs_websocket_bob2 = {"host": workers[2], "hook": hook}
     #gatway2 = sy.VirtualWorker(hook, id="gatway2")
-    gatway3 = WebsocketClientWorker(id=ids[2], port=ports[2], **kwargs_websocket_bob2)
+    #gatway3 = WebsocketClientWorker(id=ids[2], port=ports[2], **kwargs_websocket_bob2)
     
-    kwargs_websocket_alice2 = {"host": workers[3], "hook": hook}
+    #kwargs_websocket_alice2 = {"host": workers[3], "hook": hook}
     #gatway1 = sy.VirtualWorker(hook, id="gatway1")
-    gatway4= WebsocketClientWorker(id=ids[3], port=ports[3], **kwargs_websocket_alice2)
+    #gatway4= WebsocketClientWorker(id=ids[3], port=ports[3], **kwargs_websocket_alice2)
     # Number of times we want to iterate over whole training data
     #gatway3=sy.VirtualWorker(hook, id="gatway3")
     #gatway4=sy.VirtualWorker(hook, id="gatway4")
@@ -54,20 +54,20 @@ def run_train_test(workers,ports,ids,X_train, X_test, y_train, y_test,encoder):
     test_labels = torch.tensor(y_test).tag("#iot", "#network","#target","#test")
     
     # Send the training and test data to the gatways in equal proportion.
-    train_idx = int(len(train_labels)/4)
-    test_idx = int(len(test_labels)/4)
+    train_idx = int(len(train_labels)/2)
+    test_idx = int(len(test_labels)/2)
     gatway1_train_dataset = sy.BaseDataset(train_inputs[:train_idx], train_labels[:train_idx]).send(gatway1)
     gatway2_train_dataset = sy.BaseDataset(train_inputs[train_idx:2*train_idx], train_labels[train_idx:2*train_idx]).send(gatway2)
-    gatway3_train_dataset = sy.BaseDataset(train_inputs[2*train_idx:3*train_idx], train_labels[2*train_idx:3*train_idx]).send(gatway3)
-    gatway4_train_dataset = sy.BaseDataset(train_inputs[3*train_idx:], train_labels[3*train_idx:]).send(gatway4)
+    #gatway3_train_dataset = sy.BaseDataset(train_inputs[2*train_idx:3*train_idx], train_labels[2*train_idx:3*train_idx]).send(gatway3)
+    #gatway4_train_dataset = sy.BaseDataset(train_inputs[3*train_idx:], train_labels[3*train_idx:]).send(gatway4)
     gatway1_test_dataset = sy.BaseDataset(test_inputs[:test_idx], test_labels[:test_idx]).send(gatway1)
     gatway2_test_dataset = sy.BaseDataset(test_inputs[test_idx:2*test_idx], test_labels[test_idx:2*test_idx]).send(gatway2)
-    gatway3_test_dataset = sy.BaseDataset(test_inputs[2*test_idx:2*test_idx], test_labels[2*test_idx:3*test_idx]).send(gatway3)
-    gatway4_test_dataset = sy.BaseDataset(test_inputs[3*test_idx:], test_labels[3*test_idx:]).send(gatway3)
+    #gatway3_test_dataset = sy.BaseDataset(test_inputs[2*test_idx:2*test_idx], test_labels[2*test_idx:3*test_idx]).send(gatway3)
+    #gatway4_test_dataset = sy.BaseDataset(test_inputs[3*test_idx:], test_labels[3*test_idx:]).send(gatway3)
     
     # Create federated datasets, an extension of Pytorch TensorDataset class
-    federated_train_dataset = sy.FederatedDataset([gatway1_train_dataset, gatway2_train_dataset,gatway3_train_dataset,gatway4_train_dataset])
-    federated_test_dataset = sy.FederatedDataset([gatway1_test_dataset, gatway2_test_dataset,gatway3_test_dataset,gatway4_test_dataset])
+    federated_train_dataset = sy.FederatedDataset([gatway1_train_dataset, gatway2_train_dataset)]#,gatway3_train_dataset,gatway4_train_dataset])
+    federated_test_dataset = sy.FederatedDataset([gatway1_test_dataset, gatway2_test_dataset)]#,gatway3_test_dataset,gatway4_test_dataset])
     
     # Create federated dataloaders, an extension of Pytorch DataLoader class
     federated_train_loader = sy.FederatedDataLoader(federated_train_dataset, shuffle=True, batch_size=BATCH_SIZE)
