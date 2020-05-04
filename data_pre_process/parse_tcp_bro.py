@@ -1,4 +1,5 @@
-
+#Author - Ayushi Rajendra Kumar
+# reference- https://github.com/inigoperona/tcpdump2gureKDDCup99
 import sys, getopt
 import math
 import copy
