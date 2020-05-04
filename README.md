@@ -90,31 +90,28 @@ python3 sock_scan.py <ip> 22
 
 python3 sock_scan.py 10.128.0.3 22
 
-
 Work distribution and progress:
 
-Modules	                         			|     Progress	         |             Owner	           |            Due
-
-Try Approach 1 using Dianne	     			|      Failed	         |         Ayushi & Benzil	       |        15-Mar
-
-Attack Modules								|		100%			 |				Ayushi			   |		31-Mar
-
-Train Basic Model With KDD dataset			|		100%			 |				Benzil			   |		31-Mar
-
-Test Basic Model							|		100%			 |				Benzil			   |		31-Mar
-
-Train and Test Model with Multiple Nodes	|		100%			 |				Ayushi			   |		12-Apr
-
-DataSet Parser from Tshark Output			|		100%			 |				Ayushi			   |		31-Mar
-
-Prediction With whole system using live data|		100%			 |			Ayushi & Benzil		   |		20-Apr
-
-Complete System Integration					|		100%			 |			Ayushi &Benzil		   |		26-Apr
-
-Paper Writing								|		100%		     |			Ayushi &Benzil		   |		2-May
-
-
-
+|Modules	                         			|     Progress	         |             Owner	           |            Due   |
+ ----------------------------------------------- ------------------------ --------------------------------- ------------------
+|Try Approach 1 using Dianne	     			|      Failed	         |         Ayushi & Benzil	       |        15-Mar    |
+ ----------------------------------------------- ------------------------ --------------------------------- ------------------
+|Attack Modules									|		100%			 |				Ayushi			   |		31-Mar    |
+ ----------------------------------------------- ------------------------ --------------------------------- ------------------		  
+|Train Basic Model With KDD dataset				|		100%			 |				Benzil			   |		31-Mar    | 	 
+ ----------------------------------------------- ------------------------ --------------------------------- ------------------
+|Test Basic Model								|		100%			 |				Benzil			   |		31-Mar    |	 
+ ----------------------------------------------- ------------------------ --------------------------------- ------------------
+|Train and Test Model with Multiple Nodes		|		100%			 |				Ayushi			   |		12-Apr    |	 
+ ----------------------------------------------- ------------------------ --------------------------------- ------------------
+|DataSet Parser from Tshark Output				|		100%			 |				Ayushi			   |		31-Mar    |	 
+ ----------------------------------------------- ------------------------ --------------------------------- ------------------
+|Prediction With whole system using live data	|		100%			 |			Ayushi & Benzil		   |		20-Apr    |	 
+ ----------------------------------------------- ------------------------ --------------------------------- ------------------
+|Complete System Integration					|		100%			 |			Ayushi &Benzil		   |		26-Apr    |	 
+ ----------------------------------------------- ------------------------ --------------------------------- ------------------
+|Paper Writing									|		100%		     |			Ayushi &Benzil		   |		2-May     |	 
+ ----------------------------------------------- ------------------------ --------------------------------- ------------------
 
 
 
