@@ -1,4 +1,7 @@
 Github repo- https://github.ncsu.edu/arajend4/ADS
+4 Systems needed- Tested on Ubuntu
+system requirements- 
+python3, tshark, bro- using sudo apt-get install. 
 # ADS
 Intrusion detection 
 
@@ -18,7 +21,7 @@ instance-1 - 10.128.0.2  --- > attacker
 
 
 Step1: Worker nodes   Instance-2 and Instance-3:
-
+1) pip3 install -r requirements.txt.
 Run the websockets from ADS/PySyft: 
 
 Instance-2
@@ -33,7 +36,7 @@ python3 run_websocket_server.py --host 10.128.0.4 --port 8778 --id bob
 Step 2 Instance-1: 
 
 On master run main_func.py -- ADS/master_ann_final
-
+Requirements pip3 install -r requirements.txt.
 Run
 
 python3 main_func.py -w 10.128.0.3,10.128.0.4 -p 8777,8778 -i alice,bob
